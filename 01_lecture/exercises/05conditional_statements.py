@@ -12,6 +12,17 @@ Example:
 """
 # Write your solution here
 
+number = int(input("enter a number:"))
+
+if number%2 == 0:
+    print(f"The number {number} is even")
+else:
+    print(f"The number {number} is odd")
+
+
+## OR
+result = "even" if number%2 == 0 else "odd"
+print(f"The number {number} is {result}")
 
 """
 Write a program that asks the user for their exam grade (as a percentage). 
@@ -27,6 +38,14 @@ Example:
     You passed the exam!
 """
 # Write your solution here
+grade = int(input("enter exam grade:"))
+
+if grade < 60:
+    print("unfortunately, you failed the exam")
+elif grade < 90:
+    print("you passed the exam!")
+else:
+    print("you are excellent!")
 
 
 """
@@ -49,3 +68,7 @@ Example:
     Your order: Salad with ranch dressing
 """
 # Write your solution here
+
+food = input("would you like a sandwich, salad, or wrap?")
+dressing = input("what kind of dressing: vinaigrette, ranch, or caesar?")
+print(f"your order: {food} and {dressing} dressing")

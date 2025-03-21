@@ -15,6 +15,13 @@ Example:
 """
 # Write your solution here
 
+user_input = ""
+while user_input != "no":
+  print("hello world!")
+  user_input = input("shall we continue?")
+
+print("okay then")
+
 """
 Write a program which asks the user for integer numbers.
 
@@ -49,11 +56,9 @@ Hint: you can use the debugger of PyCharm to see how the program is executing.
 # Fix the code
 number = 5
 print("Countdown!")
-while True:
+while number >= 0:
   print(number)
   number = number - 1
-  if number > 0:
-    break
 
 print("Now!")
 
@@ -69,6 +74,24 @@ Examples:
     The next leap year after 2024 is 2028
 """
 # Write your solution here
+
+year = int(input("Year: "))
+
+while True:
+  year += 1
+  if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
+    print(f"The next leap year after {year - 1} is {year}")
+    break
+
+### without using while True:
+year = int(input("Year: "))
+
+year += 1
+while not ((year % 4 == 0 and year % 100 != 0) or (year % 400 == 0)):
+  year += 1
+
+print(f"The next leap year after {year - 1} is {year}")
+
 
 """
 Please write a program which keeps asking the user for words. 
@@ -88,10 +111,38 @@ Example:
 """
 # Write your solution here
 
+story = ""
+
+while True:
+  word = input("Please type in a word: ")
+  if word == "end":
+    break
+  if story:
+    story += " " + word
+  else:
+    story = word
+
+print(story)
+
 """
 Change the program above so that the loop ends also if the user types in the same word twice in a row.
 """
 # Write your solution here
+
+story = ""
+prev_word = ""
+
+while True:
+  word = input("Please type in a word: ")
+  if word == "end" or word == prev_word:
+    break
+  if story:
+    story += " " + word
+  else:
+    story = word
+  prev_word = word
+
+print(story)
 
 """
 Please write a program which asks the user for integer numbers. 
@@ -111,6 +162,38 @@ Example output
   Negative numbers 1
 """
 # Write your solution here
+# Initialize variables to store the sum, count, positive and negative counts
+total_sum = 0
+count = 0
+positive_count = 0
+negative_count = 0
+
+# Keep asking for numbers until the user enters 0
+number = int(input("Enter an integer (0 to stop): "))
+
+while number != 0:
+  total_sum += number
+  count += 1
+
+  # Check if the number is positive or negative and update the respective count
+  if number > 0:
+    positive_count += 1
+  elif number < 0:
+    negative_count += 1
+
+  # Ask for the next number
+  number = int(input("Enter an integer (0 to stop): "))
+
+# After the loop, print the results
+if count > 0:
+  mean = total_sum / count
+  print(f"\nNumbers typed in: {count}")
+  print(f"The sum of the numbers is {total_sum}")
+  print(f"The mean of the numbers is {mean}")
+  print(f"Positive numbers: {positive_count}")
+  print(f"Negative numbers: {negative_count}")
+else:
+  print("No numbers were entered.")
 
 """
 Largest Number
@@ -152,6 +235,29 @@ Examples:
 """
 # Write your solution here
 
+count = 1
+number = float(input(f"Number {count}: >> "))
+
+if number <= 0:
+    print("No number entered.")
+else:
+    largest_number = number
+    count += 1
+
+    # Ask for the next number
+    number = float(input(f"Number {count}: >> "))
+
+    while number > 0:
+        # Update the largest number if the current number is larger
+        if number > largest_number:
+            largest_number = number
+        count += 1
+        number = float(input(f"Number {count}: >> "))
+
+    # Print the largest number found
+    print(f"The largest number is {largest_number}")
+
+
 """
 Write a program that uses loops to create a pyramid of stars '*' on the console. 
 The pyramid should have exactly 6 rows.
@@ -164,6 +270,39 @@ Example:
   ***********
 """
 # Write your solution here
+# Number of rows in the pyramid
+rows = 6
+
+#### solution without nesting loops using a range
+for i in range(1, rows + 1):
+  # Print leading spaces
+  print(' ' * (rows - i), end='')
+
+  # Print stars
+  print('*' * (2 * i - 1))
+
+
+#### Using while loops
+rows = 6
+i = 1
+
+while i <= rows:
+  # print leading spaces
+  j = 1
+  while j <= (rows - i):
+    print(' ', end='')
+    j += 1
+
+  # print stars
+  k = 1
+  while k <= (2 * i - 1):
+    print('*', end='')
+    k += 1
+
+  # next line
+  print()
+
+  i += 1
 
 """
 Write a program to calculate the average grade. The console reads in grades between 1 and 5 
@@ -183,3 +322,30 @@ Example:
   Negative marks: 2
 """
 # Write your solution here
+
+total_sum = 0
+count = 0
+negative_count = 0
+
+mark_number = 1
+mark = int(input(f"Mark {mark_number}: >> "))
+
+while mark != 0:
+  # If the mark is valid (between 1 and 5)
+  if 1 <= mark <= 5:
+    total_sum += mark
+    count += 1
+    if mark == 5:
+      negative_count += 1
+  else:
+    print("Invalid mark!")
+
+  mark_number += 1
+  mark = int(input(f"Mark {mark_number}: >> "))  # ask for the next mark
+
+if count > 0:
+  average = total_sum / count
+  print(f"Average: {average:.2f}")
+  print(f"Negative marks: {negative_count}")
+else:
+  print("No valid grades entered.")
